@@ -3,6 +3,7 @@ import { useState } from "react";
 import http from "./http";
 import { useDispatch } from 'react-redux';
 import { changeOption } from './features/option/optionSlice';
+import Button from '@mui/material/Button';
 
 const useLoginHook = () => {
     const [email, setEmail] = useState('');
@@ -45,10 +46,11 @@ function Login(props) {
     return (
         <div className="App">
           <header className="App-header">
-              <h1>Bienvenido!</h1>
+            <img src='logo.jpg' alt='logo'/>
+            <h1>Bienvenido!</h1>
             <input type="text" placeholder="Correo electronico" value={email} onChange={e => setEmail(e.target.value)}/>
             <input type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)}/>
-            <button onClick={() => login(onSuccess, onError)}>Ingresar</button>
+            <Button color='success' variant='contained' onClick={() => login(onSuccess, onError)}>Ingresar</Button>
           </header>
         </div>
     );

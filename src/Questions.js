@@ -1,8 +1,14 @@
+import './index.css';
+import * as React from 'react';
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeOption } from "./features/option/optionSlice";
 import http from "./http";
 import Question from "./Question";
+import Button from '@mui/material/Button';
+import PeopleIcon from '@mui/icons-material/People';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Tooltip from '@mui/material/Tooltip';
 
 const useQuestionHook = () => {
     const [description, setDescription] = useState('');
@@ -59,19 +65,23 @@ function Questions() {
 
     return (
         <div>
-            <h2>Hola {user.firstName} {user.lastName}!</h2>
-            <h2>Haz tu pregunta</h2>
-            <div >
-                <textarea value={description} onChange={e => setDescription(e.target.value)}></textarea><br/>
-                <button onClick={() => createQuestion()}>Preguntar</button>
-                <button onClick={() => readQuestions()}>Actualizar</button>
-                {user?.admin ? (<button onClick={() => dispatch(changeOption(3))}>Usuarios</button>) : (<></>)}
-                <button onClick={() => logout()}>Salir</button>
+            <div className='question__banner'>
+                <img className='question__banner' src='banner.jpg' alt='banner'/>
             </div>
-            <h1>Preguntas</h1>
-            {questions?.map(question => (
-                <Question key={question.id} question={question} onSuccess={() => readQuestions()}/>
-            ))}
+            <div className='question__panel'>
+                <h2>Hola {user.firstName} {user.lastName}! Haz tu pregunta</h2>
+                <textarea rows={7} value={description} onChange={e => setDescription(e.target.value)}></textarea>
+                <div className='question__options'>
+                    {user?.admin ? (<Tooltip title="Usuarios"><Button color='success' onClick={() => dispatch(changeOption(3))}><PeopleIcon/></Button></Tooltip>) : (<></>)}
+                    <Button color='success' variant='contained' onClick={() => createQuestion()}>Preguntar</Button>
+                    <Tooltip title="Salir">
+                        <Button color='success' onClick={() => logout()}><LogoutIcon/></Button>
+                    </Tooltip>
+                </div>
+                {questions?.map(question => (
+                    <Question key={question.id} question={question} onSuccess={() => readQuestions()}/>
+                ))}
+            </div>
         </div>
     );
 }

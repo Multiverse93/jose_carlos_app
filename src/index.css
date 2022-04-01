@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 25px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +11,56 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1, h2 {
+  color: #339967;
+}
+
+textarea {
+  width: 35%;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+button {
+  margin: 10px !important;
+}
+
+small {
+  font-size: xx-small;
+}
+
+input[type='text'] {
+  margin: 10px;
+}
+
+div.question__panel, div.user__panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+div.question__banner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img.question__banner {
+  width: 35%;
+}
+
+div.question__card, div.user__card {
+  width: 50%;
+  margin: 20px;
+  padding: 10px;
+  background-color: #E7E9EB;
+  border-radius: 20px;
+}
+
+div.user__card {
+  cursor: pointer;
 }

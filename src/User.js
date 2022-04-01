@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeOption } from "./features/option/optionSlice";
 import { readUser, setUser } from "./features/user/userSlice";
 import http from "./http";
+import Button from '@mui/material/Button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Tooltip from '@mui/material/Tooltip';
 
 const useUser = () => {
     const [id, setId] = useState(null);
@@ -77,7 +80,7 @@ function User() {
     }, []);
 
     return (
-        <div>
+        <div className="user__form">
             <h1>{user?.id > 0 ? 'Editar Usuario' : 'Crear Usuario'}</h1>
             <label>Nombres</label><br/>
             <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)}/><br/>
@@ -85,14 +88,16 @@ function User() {
             <input type="text" value={lastName} onChange={e => setLastName(e.target.value)}/><br/>
             <label>Correo electronico</label><br/>
             <input type="text" value={email} onChange={e => setEmail(e.target.value)}/><br/>
-            <label>Administrador</label>
+            <label>Veterinario</label>
             <input type="checkbox" checked={admin} onChange={e => setAdmin(!admin)}/><br/>
             <label>Contraseña</label><br/>
             <input type="password" value={password} onChange={e => setPassword(e.target.value)}/><br/>
             <label>Repite contraseña</label><br/>
             <input type="password" value={repitedPassword} onChange={e => setRepitedPassword(e.target.value)}/><br/>
-            <button onClick={() => saveUser(() =>{ dispatch(setUser(null)); dispatch(changeOption(3)); })}>Guardar</button>
-            <button onClick={() => { dispatch(setUser(null)); dispatch(changeOption(3));}}>Regresar</button>
+            <Tooltip title="Regresar">
+            <Button color='success' onClick={() => { dispatch(setUser(null)); dispatch(changeOption(3));}}><ArrowBackIcon/></Button>
+            </Tooltip>
+            <Button color='success' variant='contained' onClick={() => saveUser(() =>{ dispatch(setUser(null)); dispatch(changeOption(3)); })}>Guardar</Button>
         </div>
     );
 }

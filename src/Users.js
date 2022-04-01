@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { changeOption } from "./features/option/optionSlice";
 import { setUser } from "./features/user/userSlice";
 import http from "./http";
+import Button from '@mui/material/Button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Tooltip from '@mui/material/Tooltip';
 
 const useUsers = () => {
     const [users, setUsers] = useState([]);
@@ -32,19 +35,21 @@ function Users() {
     }, []);
 
     return (
-        <div>
+        <div className="user__panel">
             <h1>Usuarios</h1>
-            <button onClick={() => dispatch(changeOption(2))}>Regresar</button>
-            <button onClick={() => dispatch(changeOption(4))}>Nuevo Usuario</button><br/><br/>
+            <div className="user__options">
+                <Tooltip title="Regresar">
+                    <Button color='success' onClick={() => dispatch(changeOption(2))}><ArrowBackIcon/></Button>
+                </Tooltip>
+                <Button color='success' variant='contained' onClick={() => dispatch(changeOption(4))}>Nuevo Usuario</Button><br/><br/>
+            </div>
             {users?.map(user => (
-                <div>
+                <div className="user__card">
                     <div key={user.id} onClick={() => { dispatch(setUser(user)); dispatch(changeOption(4));}}>
-                        <label>Nombre: {user.firstName} {user.lastName}</label><br/>
-                        <label>Correo electronico: {user.email}</label><br/>
-                        <label>Administrador: {user.admin ? 'Si': 'No'}</label><br/>
+                        <label><b>Nombre:</b> {user.firstName} {user.lastName}</label><br/>
+                        <label><b>Correo electronico:</b> {user.email}</label><br/>
+                        <label><b>{user.admin ? 'Veterinario': 'Cliente'}</b></label><br/>
                     </div>
-                    <br/>
-                    <br/>
                 </div>
             ))}
         </div>
